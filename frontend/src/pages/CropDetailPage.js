@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios for making HTTP requests
+import axios from 'axios'; 
 import { useTranslation } from 'react-i18next';
 import CategoryCard from '../components/CategoryCard';
 import '../styles/CropDetailPage.css';
@@ -14,7 +14,7 @@ const CropDetailPage = () => {
         t('Weed Control'), t('Crop Maintenance'), t('Harvesting'), t('Post-Harvest Handling')
     ];
 
-    const [cropName] = useState(window.location.pathname.split('/').pop()); // Extract crop name from URL
+    const [cropName] = useState(window.location.pathname.split('/').pop()); 
     const [responseDetails, setResponseDetails] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('');
     const [error, setError] = useState(null);
@@ -26,7 +26,7 @@ const CropDetailPage = () => {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:5000/crop_steps', {
+            const response = await axios.post('https://krishi-vikas.onrender.com/crop_steps', {
                 crop_name: cropName,
                 language: localStorage.getItem('languagePreference') || 'en',
                 category: category
@@ -56,8 +56,8 @@ const CropDetailPage = () => {
                         <CategoryCard
                             key={cat}
                             category={cat}
-                            details={responseDetails[cat] || (selectedCategory === cat ? t('Loading...') : '')} // Show details if the category is selected
-                            onClick={() => handleCategoryClick(cat)} // Pass onClick handler
+                            details={responseDetails[cat] || (selectedCategory === cat ? t('Loading...') : '')} 
+                            onClick={() => handleCategoryClick(cat)} 
                         />
                     ))}
                 </div>

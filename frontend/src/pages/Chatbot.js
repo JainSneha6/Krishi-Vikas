@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
+import { useTranslation } from 'react-i18next';
 import CategoryCard from '../components/CategoryCard';
 import Header from '../components/Header';
 
 const Chatbot = () => {
-    const { t, i18n } = useTranslation(); // Initialize the translation function
+    const { t, i18n } = useTranslation(); 
     const [query, setQuery] = useState('');
     const [cropName, setCropName] = useState('');
-    const [responseDetails, setResponseDetails] = useState(''); // State for details
+    const [responseDetails, setResponseDetails] = useState(''); 
     const [error, setError] = useState(null);
     const [language, setLanguage] = useState(localStorage.getItem('languagePreference') || 'en');
 
@@ -22,30 +22,29 @@ const Chatbot = () => {
 
         try {
             if (query) {
-                // Call the chatbot route if the query is provided
-                const response = await axios.post('http://localhost:5000/chatbot', {
+                const response = await axios.post('https://krishi-vikas.onrender.com/chatbot', {
                     query: query,
                     crop_name: cropName,
                     language: language,
                 });
 
-                setResponseDetails(response.data.response || ''); // Set details for CategoryCard
+                setResponseDetails(response.data.response || ''); 
             } else {
-                setError(t('Please provide a query.')); // Translate the error message
+                setError(t('Please provide a query.')); 
             }
         } catch (err) {
             console.error('Error fetching response:', err);
-            setError(t('Failed to fetch details. Please try again later.')); // Translate the error message
+            setError(t('Failed to fetch details. Please try again later.')); 
         }
     };
 
     return (
         <>
-            <Header name={t('Crop Management Chatbot')} /> {/* Translate the header name */}
+            <Header name={t('Crop Management Chatbot')} /> 
             <div>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="query">{t('Your Query')}</label> {/* Translate the label */}
+                        <label htmlFor="query">{t('Your Query')}</label> 
                         <input
                             type="text"
                             id="query"
@@ -55,7 +54,7 @@ const Chatbot = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="cropName">{t('Crop Name')}</label> {/* Translate the label */}
+                        <label htmlFor="cropName">{t('Crop Name')}</label> 
                         <input
                             type="text"
                             id="cropName"
@@ -63,10 +62,10 @@ const Chatbot = () => {
                             onChange={(e) => setCropName(e.target.value)}
                         />
                     </div>
-                    <button type="submit">{t('Send')}</button> {/* Translate the button text */}
+                    <button type="submit">{t('Send')}</button> 
                 </form>
                 <div className="crop-detail-page">
-                    {error && <p className="error-message">{error}</p>} {/* Display the error message */}
+                    {error && <p className="error-message">{error}</p>} 
                     <CategoryCard
                         category={t('Response')}
                         cropName={cropName}

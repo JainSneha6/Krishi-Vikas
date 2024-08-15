@@ -5,7 +5,7 @@ import CategoryCard from '../components/CategoryCard';
 import { useTranslation } from 'react-i18next';
 
 const YieldPrediction = () => {
-    const { t, i18n } = useTranslation(); // Initialize translation and i18n
+    const { t, i18n } = useTranslation(); 
     const [cropName, setCropName] = useState('');
     const [pesticidesTonnes, setPesticidesTonnes] = useState('');
     const [result, setResult] = useState(null);
@@ -27,7 +27,7 @@ const YieldPrediction = () => {
 
     const getWeatherData = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/weather_data', {
+            const response = await axios.post('https://krishi-vikas.onrender.com/weather_data', {
                 latitude: localStorage.getItem('latitude'),
                 longitude: localStorage.getItem('longitude'),
             });
@@ -42,7 +42,7 @@ const YieldPrediction = () => {
 
     const getYieldPrediction = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/yield-prediction', {
+            const response = await axios.post('https://krishi-vikas.onrender.com/yield-prediction', {
                 crop_name: cropName,
                 average_rain_fall_mm_per_year: weatherData.avgRainfall,
                 pesticides_tonnes: pesticidesTonnes,
@@ -50,7 +50,7 @@ const YieldPrediction = () => {
             });
             setResult(response.data.predicted_yield);
         } catch (err) {
-            setError(t('errorFetchingYieldPrediction'));
+            setError(t(''));
         }
     };
 
@@ -59,7 +59,7 @@ const YieldPrediction = () => {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:5000/yield-improvement-chatbot', {
+            const response = await axios.post('https://krishi-vikas.onrender.com/yield-improvement-chatbot', {
                 crop_name: cropName,
                 category: category,
                 avg_temp: weatherData.avgTemp,

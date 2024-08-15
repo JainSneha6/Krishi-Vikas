@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
-import '../styles/Posts.css'; // Import your CSS file
+import '../styles/Posts.css'; 
 
 const Posts = () => {
   const { t, i18n } = useTranslation();
@@ -13,7 +13,6 @@ const Posts = () => {
   const names = ['Raju', 'Krishna', 'Ram', 'Amit', 'Dev'];
 
   useEffect(() => {
-    // Load language preference from localStorage
     const storedLang = localStorage.getItem('languagePreference') || 'en';
     i18n.changeLanguage(storedLang);
 

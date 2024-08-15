@@ -10,12 +10,12 @@ const CropCategoryPage = () => {
     const { category } = useParams();
     const [recommendations, setRecommendations] = useState([]);
     const [error, setError] = useState(null);
-    const { t } = useTranslation(); // Initialize the translation function
+    const { t } = useTranslation(); 
 
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/recommendations', {
+                const response = await axios.post('https://krishi-vikas.onrender.com/recommendations', {
                     latitude: localStorage.getItem('latitude'),
                     longitude: localStorage.getItem('longitude'),
                     category,
@@ -25,7 +25,7 @@ const CropCategoryPage = () => {
                 setError(null);
             } catch (err) {
                 console.error('Error fetching recommendations:', err);
-                setError(t('errorFetchingRecommendations')); // Translate the error message
+                setError(t('errorFetchingRecommendations')); 
             }
         };
 
@@ -34,16 +34,16 @@ const CropCategoryPage = () => {
 
     return (
         <>
-            <Header name={t('Crop Recommendations')}/> {/* Translate the header name */}
+            <Header name={t('Crop Recommendations')}/> 
             <div className="crop-category-page">
-                {error && <p className="error">{t(error)}</p>} {/* Translate the error message */}
+                {error && <p className="error">{t(error)}</p>} 
                 <ul>
                     {recommendations.map((rec, index) => (
                         <CropDetailCard
                             key={index}
-                            name={t(rec.name)} // Translate the name
+                            name={t(rec.name)} 
                             ename={rec.ename}
-                            description={t(rec.description)} // Translate the description
+                            description={t(rec.description)} 
                             image={rec.image}
                         />
                     ))}

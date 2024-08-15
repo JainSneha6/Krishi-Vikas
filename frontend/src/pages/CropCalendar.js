@@ -21,7 +21,7 @@ const CropCalendar = () => {
 
   const fetchCalendarEntries = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/calendar');
+      const response = await axios.get('https://krishi-vikas.onrender.com/calendar');
       setCalendarEntries(response.data);
     } catch (error) {
       console.error('Error fetching calendar entries', error);
@@ -42,7 +42,7 @@ const CropCalendar = () => {
 
   const handleAddEntry = async () => {
     try {
-      await axios.post('http://localhost:5000/calendar', newEntry);
+      await axios.post('https://krishi-vikas.onrender.com/calendar', newEntry);
       fetchCalendarEntries();
       setNewEntry({ date: new Date(), crop: '', task: '' });
     } catch (error) {
@@ -52,7 +52,7 @@ const CropCalendar = () => {
 
   const handleDeleteEntry = async (index) => {
     try {
-      await axios.delete(`http://localhost:5000/calendar/${index}`);
+      await axios.delete(`https://krishi-vikas.onrender.com/calendar/${index}`);
       fetchCalendarEntries();
     } catch (error) {
       console.error('Error deleting entry', error);

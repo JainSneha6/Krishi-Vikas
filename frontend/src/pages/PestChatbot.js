@@ -6,7 +6,7 @@ import CategoryCard from '../components/CategoryCard';
 import { useTranslation } from 'react-i18next';
 
 const PestChatbot = () => {
-    const { t, i18n } = useTranslation(); // Initialize translation
+    const { t, i18n } = useTranslation();
     const [cropName, setCropName] = useState('');
     const [image, setImage] = useState(null);
     const [responseDetails, setResponseDetails] = useState('');
@@ -15,7 +15,6 @@ const PestChatbot = () => {
     const [disease, setDisease] = useState('');
 
     useEffect(() => {
-        // Retrieve and set the language from localStorage
         const storedLanguage = localStorage.getItem('languagePreference') || 'en';
         i18n.changeLanguage(storedLanguage).catch(err => console.error('Error changing language:', err));
     }, []);
@@ -36,7 +35,7 @@ const PestChatbot = () => {
                 const formData = new FormData();
                 formData.append('image', image);
 
-                const response = await axios.post('http://localhost:5000/predict-disease', formData, {
+                const response = await axios.post('https://krishi-vikas.onrender.com/predict-disease', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -47,7 +46,7 @@ const PestChatbot = () => {
             } 
         } catch (err) {
             console.error('Error fetching response:', err);
-            setError(t('fetchDetailsError'));
+            setError(t(''));
         }
     };
 
@@ -56,7 +55,7 @@ const PestChatbot = () => {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:5000/crop_steps', {
+            const response = await axios.post('https://krishi-vikas.onrender.com/crop_steps', {
                 crop_name: cropName ? cropName : disease,
                 language: localStorage.getItem('languagePreference') || 'en',
                 category: category
@@ -65,7 +64,7 @@ const PestChatbot = () => {
             setResponseDetails(response.data || '');
         } catch (err) {
             console.error('Error fetching data:', err);
-            setError(t('fetchDetailsError'));
+            setError(t(''));
         }
     };
 

@@ -4,12 +4,11 @@ import Header from '../components/Header';
 import { useTranslation } from 'react-i18next';
 
 const Chatbot = () => {
-  const { t, i18n } = useTranslation(); // Initialize translation and i18n
+  const { t, i18n } = useTranslation(); 
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Set language based on localStorage
   useEffect(() => {
     const language = localStorage.getItem('languagePreference') || 'en';
     i18n.changeLanguage(language).catch(err => console.error(`Error changing language: ${err}`));
@@ -21,7 +20,7 @@ const Chatbot = () => {
     setMessages([...messages, newMessage]);
     setLoading(true);
 
-    axios.post('http://localhost:5000/chatbot-expert', { query, language: localStorage.getItem('languagePreference') })
+    axios.post('https://krishi-vikas.onrender.com/chatbot-expert', { query, language: localStorage.getItem('languagePreference') })
       .then(response => {
         const botMessage = { text: response.data.response, type: 'bot' };
         setMessages([...messages, newMessage, botMessage]);
