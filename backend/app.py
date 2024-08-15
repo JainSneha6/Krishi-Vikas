@@ -10,14 +10,16 @@ import os
 import numpy as np
 from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+import pymongo
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///farmers.db'
-db = SQLAlchemy(app)
+CORS(app) 
+
+client = pymongo.MongoClient(os.getenv('URL'))
+db = client['usersdb']
+
+load_dotenv()
 
 WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -325,16 +327,11 @@ def yield_improvement_chatbot():
     except Exception as e:
         print(f"Error generating yield improvement response: {e}")
         return jsonify({'error': 'Failed to get yield improvement response'}), 500
-    
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
-    media_url = db.Column(db.String(256), nullable=True)
 
 @app.route('/api/posts', methods=['GET'])
 def get_posts():
-    posts = Post.query.all()
-    return jsonify([{'id': post.id, 'content': post.content, 'media_url': post.media_url} for post in posts])
+    posts = db.posts.find()
+    return jsonify([{'id': str(post['_id']), 'content': post['content'], 'media_url': post.get('media_url')} for post in posts])
 
 @app.route('/api/posts', methods=['POST'])
 def create_post():
@@ -347,9 +344,8 @@ def create_post():
         file.save(file_path)
         media_url = filename
 
-    new_post = Post(content=data['content'], media_url=media_url)
-    db.session.add(new_post)
-    db.session.commit()
+    new_post = {'content': data['content'], 'media_url': media_url}
+    db.posts.insert_one(new_post)
     return jsonify({'message': 'Post created successfully'}), 201
 
 @app.route('/uploads/<filename>')
@@ -379,25 +375,18 @@ def chatbot_expert():
     except Exception as e:
         print(f"Error generating chatbot response: {e}")
         return jsonify({'error': 'Failed to get chatbot response'}), 500
-    
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    author = db.Column(db.String(100), nullable=False)
 
 @app.route('/api/blogs', methods=['GET'])
 def get_blogs():
-    blogs = Blog.query.all()
-    return jsonify([{'id': b.id, 'title': b.title, 'content': b.content, 'author': b.author} for b in blogs])
+    blogs = db.blogs.find()
+    return jsonify([{'id': str(blog['_id']), 'title': blog['title'], 'content': blog['content'], 'author': blog['author']} for blog in blogs])
 
 @app.route('/api/blogs', methods=['POST'])
 def create_blog():
     data = request.json
-    new_blog = Blog(title=data['title'], content=data['content'], author=data['author'])
-    db.session.add(new_blog)
-    db.session.commit()
-    return jsonify({'id': new_blog.id, 'title': new_blog.title, 'content': new_blog.content, 'author': new_blog.author}), 201
+    new_blog = {'title': data['title'], 'content': data['content'], 'author': data['author']}
+    result = db.blogs.insert_one(new_blog)
+    return jsonify({'id': str(result.inserted_id), 'title': new_blog['title'], 'content': new_blog['content'], 'author': new_blog['author']}), 201
 
 crop_calendar = []
 
@@ -419,15 +408,11 @@ def delete_entry(index):
         return jsonify(removed_entry)
     return jsonify({'error': 'Entry not found'}), 404
 
-
-
 if __name__ == '__main__':
     
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
-
-    with app.app_context():
-        db.create_all()
+        
     app.run(debug=True)
     
 
