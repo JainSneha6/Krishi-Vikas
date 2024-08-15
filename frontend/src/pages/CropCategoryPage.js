@@ -34,7 +34,7 @@ const CropCategoryPage = () => {
         };
 
         fetchRecommendations();
-    }, [category, t]);
+    }, [category]);
 
     return (
         <>
