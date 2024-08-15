@@ -8,7 +8,6 @@ import joblib
 import pandas as pd
 import os
 import numpy as np
-from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
 import pymongo
 from dotenv import load_dotenv
