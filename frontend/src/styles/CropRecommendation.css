@@ -1,0 +1,72 @@
+.crop-recommendation-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(360deg, #76c76b, #4b8f4b);
+    height: 45vh;
+    display: flex;
+}
+
+.container h1{
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+    padding-top: 120px;
+    padding-left: 240px;
+}
+
+.giphy-embed {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+}
+
+.crop-category-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.error {
+    color: #d9534f;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.crop-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px;
+    gap: 5px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.crop-card:hover {
+    transform: scale(1.05);
+}
+
+.crop-card-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.crop-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}

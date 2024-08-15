@@ -1,0 +1,67 @@
+
+  .post-form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post-textarea {
+    width: 95%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    resize: none;
+  }
+  
+  .post-file-input {
+    margin-bottom: 4px;
+  }
+  
+  .post-submit-button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .post-submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .posts-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .post-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .post-author {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+  }
+  
+  .post-content {
+    font-size: 16px;
+    white-space: pre-wrap; /* Preserve whitespace formatting */
+  }
+  
+  .post-media {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+  }
+
+  img, video{
+    width:200px;
+    height:400px;
+  }
+  

@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.home-page {
+  background-image: url('../../public/image.png'); /* Add your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.home-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.home-page h2 {
+  margin-bottom: 30px;
+}
+
+.language-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.5); 
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.language-selector select,
+.language-selector button {
+  font-size: 1rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.language-selector select {
+  background: #fff;
+  color: #333;
+  width: 200px;
+}
+
+.language-selector button {
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.language-selector button:hover {
+  background: #0056b3;
+}
+
+.home-page button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.home-page button:hover {
+  background: #218838;
+}
+
+.error {
+  color: #f44336;
+  margin-top: 15px;
+  font-size: 1rem;
+}

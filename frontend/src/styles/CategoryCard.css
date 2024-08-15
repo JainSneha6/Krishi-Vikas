@@ -1,0 +1,23 @@
+/* src/styles/CategoryCard.css */
+.category-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    max-height: 100px; /* Initial height */
+}
+
+.category-card.expanded {
+    max-height: 500px; /* Expanded height */
+}
+
+.category-card:hover {
+    background-color: #f0f0f0;
+}
+
+.card-details {
+    margin-top: 10px;
+}

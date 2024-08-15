@@ -1,0 +1,56 @@
+.blog-page {
+    padding: 20px;
+  }
+  
+  .blog-form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .blog-input {
+    width: 94%;
+    margin-bottom: 10px;
+  }
+
+  .blog-textarea{
+    width: 94%;
+    margin-bottom: 10px;
+    height:600px;
+  }
+  
+  .blog-submit-button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .blog-submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .blogs-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .blog-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .blog-title {
+    font-size: 1.5em;
+    margin: 0;
+  }
+  
+  .blog-author {
+    font-style: italic;
+  }
+  
+  .blog-content {
+    margin: 10px 0;
+  }
+  

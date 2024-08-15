@@ -1,0 +1,21 @@
+.crop-category-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.crop-category-page ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.error {
+    color: #d9534f;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: center;
+}
